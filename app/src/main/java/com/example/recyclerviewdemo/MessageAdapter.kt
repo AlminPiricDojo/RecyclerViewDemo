@@ -1,30 +1,24 @@
 package com.example.recyclerviewdemo
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_custom_row.view.*
+import com.example.recyclerviewdemo.databinding.ItemCustomRowBinding
 
 class MessageAdapter(private val messages: ArrayList<String>):
     RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
-    class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class MessageViewHolder(val binding: ItemCustomRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         return MessageViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_custom_row,
-                parent,
-                false
-            )
+            ItemCustomRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
         val message = messages[position]
 
-        holder.itemView.apply {
+        holder.binding.apply {
             tvMessage.text = message
         }
     }
